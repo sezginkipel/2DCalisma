@@ -1,0 +1,15 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/USS/GameUI.uss?fileID=7433441132597879392&amp;guid=673058a34c572d746b190f589c169ec8&amp;type=3#GameUI" />
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-self: center; justify-content: space-between; width: 100%;">
+        <ui:Button text="-" name="MenuIcon" class="btn" style="align-self: flex-end; align-items: auto; justify-content: space-around;" />
+        <ui:VisualElement name="Panel" style="flex-grow: 1; -unity-background-image-tint-color: rgb(218, 218, 218); -unity-background-scale-mode: stretch-to-fill; background-size: 100% 100%; background-color: rgb(241, 225, 225); width: 500px; height: 10px; max-height: 400px; align-self: center; justify-content: flex-start; align-items: center; align-content: auto; display: none;">
+            <ui:Label text="Oyun Durduruldu" />
+            <ui:VisualElement name="MenuButtons" style="flex-grow: 1; display: flex;">
+                <ui:Button text="Devam Et" class="btn" />
+                <ui:Button text="Ayarlar" class="btn" />
+                <ui:Button text="Ana Menü" class="btn" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; max-height: 36px;" />
+    </ui:VisualElement>
+</ui:UXML>
