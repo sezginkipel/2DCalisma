@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac6e18c53fefcc4a9754d25ba5469db, type: 3}
+  m_Name: Spiked Glove
+  m_EditorClassIdentifier: 
+  weaponName: Spiked Glove
+  description: 
+  icon: {fileID: 0}
+  weaponType: 0
+  damage: 20
+  attackCooldown: 0.8
+  range: 1.5
+  projectileSpeed: 0
+  knockback: 5
+  pierceCount: 0
+  hasOnHitEffect: 1
+  onHitEffectDescription: "D\xFC\u015Fman\u0131 geri iter, %10 ihtimalle kanama uygular."
+  weaponPrefab: {fileID: 0}
