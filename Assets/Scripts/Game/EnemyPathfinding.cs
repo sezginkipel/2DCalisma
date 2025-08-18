@@ -6,6 +6,9 @@ public class EnemyPathfinding : MonoBehaviour
     [Header("Player")]
     private GameObject player;
 
+    [Header("Particle System")]
+    private ParticleSystem particleSystem;
+
     [Header("Settings")]
     public float moveSpeed = 2f;
     public float playerDetectionRadius = 5f;
@@ -18,6 +21,7 @@ public class EnemyPathfinding : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        particleSystem = GetComponent<ParticleSystem>();
 
         if (player == null)
         {
