@@ -53,7 +53,7 @@ public class EnemyPathfinding : MonoBehaviour
 
         if (distanceToPlayer <= playerDetectionRadius)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
