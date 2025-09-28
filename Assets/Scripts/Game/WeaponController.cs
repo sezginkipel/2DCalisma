@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour
     //public AudioClip reloadSound;
     public GameObject projectilePrefab;
     public Transform firePoint;
-    public float weaponRange = 10f;
+    public float weaponRange = 100f;
     public float fireRate = 0.5f;
     private float _fireCooldown;
     private Vector2 enemyPosition;
@@ -46,8 +46,9 @@ public class WeaponController : MonoBehaviour
         if (projectileScript != null)
         {
             // Merminin yönünü belirle
-            Vector2 direction = firePoint.up;
+            //Vector2 direction = firePoint.up;
             projectileScript.SetDirection(enemyPosition);
+            
         }
     }
 }
