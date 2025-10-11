@@ -10,45 +10,59 @@ public class WeaponController : MonoBehaviour
     public float weaponRange = 100f;
     public float fireRate = 0.5f;
     private float _fireCooldown;
-    private Vector2 enemyPosition;
+    private Transform _target;
 
-
-    void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
-        {
-            enemyPosition = collision.transform.position;
-            Debug.Log("Düşman pozisyonu: " + enemyPosition);
-        }
-    }
 
     void Update()
     {
+        FindClosestEnemy();
+
         _fireCooldown -= Time.deltaTime;
-        if (_fireCooldown <= 0f)
+        if (_fireCooldown <= 0f && _target != null)
         {
-            // Düşmanın menzilde olup olmadığını kontrol et
-            if (Vector2.Distance(transform.position, enemyPosition) <= weaponRange)
+            FireProjectile();
+            _fireCooldown = fireRate;
+            if (weaponAudioSource != null && fireSound != null)
             {
-                FireProjectile();
-                _fireCooldown = fireRate;
-                if (weaponAudioSource != null && fireSound != null)
-                {
-                    weaponAudioSource.PlayOneShot(fireSound);
-                }
+                weaponAudioSource.PlayOneShot(fireSound);
             }
         }
     }
+
+    void FindClosestEnemy()
+    {
+        float distanceToClosestEnemy = Mathf.Infinity;
+        Enemy closestEnemy = null;
+        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+
+        foreach (Enemy currentEnemy in allEnemies)
+        {
+            float distanceToEnemy = (currentEnemy.transform.position - transform.position).sqrMagnitude;
+            if (distanceToEnemy < distanceToClosestEnemy)
+            {
+                distanceToClosestEnemy = distanceToEnemy;
+                closestEnemy = currentEnemy;
+            }
+        }
+
+        if (closestEnemy != null && distanceToClosestEnemy <= weaponRange * weaponRange)
+        {
+            _target = closestEnemy.transform;
+        }
+        else
+        {
+            _target = null;
+        }
+    }
+
     void FireProjectile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
         Projectile projectileScript = projectile.GetComponent<Projectile>();
-        if (projectileScript != null)
+        if (projectileScript != null && _target != null)
         {
-            // Merminin yönünü belirle
-            //Vector2 direction = firePoint.up;
-            projectileScript.SetDirection(enemyPosition);
-            
+            Vector2 direction = (_target.position - firePoint.position).normalized;
+            projectileScript.SetDirection(direction);
         }
     }
 }

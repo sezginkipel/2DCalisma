@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac6e18c53fefcc4a9754d25ba5469db, type: 3}
+  m_Name: AK47
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponData
+  weaponName: AK47
+  description: AK47
+  icon: {fileID: -7888296697152109952, guid: 4565187948f1c954f91f844290cf70db, type: 3}
+  weaponType: 1
+  damage: 12
+  attackCooldown: 0.6
+  range: 350
+  projectileSpeed: 715
+  knockback: 35
+  pierceCount: 30
+  hasOnHitEffect: 0
+  onHitEffectDescription: 
+  weaponPrefab: {fileID: 6074360450538194113, guid: ecc0cf4006e83f4459ec3618e57b3377, type: 3}

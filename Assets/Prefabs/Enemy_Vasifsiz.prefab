@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5417476504621248331}
   - component: {fileID: 4600052570688753778}
   - component: {fileID: 6838581385211619881}
+  - component: {fileID: -6632425676353490277}
   m_Layer: 0
   m_Name: Enemy_Vasifsiz
   m_TagString: Enemy
@@ -179,7 +180,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6838581385211619881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,3 +196,17 @@ MonoBehaviour:
   moveSpeed: 0.25
   playerDetectionRadius: 5
   drawGizmos: 1
+--- !u!114 &-6632425676353490277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509662573411475244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17875946efc5ebc49b4d2ac7eb21cd22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  health: 100
+  coinPrefab: {fileID: 5924253353501285815, guid: c6522ee5de08252419ca68e9e92653f1, type: 3}

@@ -10,21 +10,10 @@ public class LevelController : MonoBehaviour
 
     public TMP_Text levelCountdownText;
 
-
-
     void Start()
     {
         StartCoroutine(LevelTimeCountdown());
-
     }
-
-    void Update()
-    {
-
-    }
-
-
-
 
     // Level time countdown IEnumerator
     public IEnumerator LevelTimeCountdown()
@@ -33,7 +22,6 @@ public class LevelController : MonoBehaviour
         {
             yield return new WaitForSeconds(1);
             levelTime--;
-            Debug.Log("Kalan Süre: " + levelTime + " saniye");
             levelCountdownText.text = levelTime.ToString();
             if (levelTime < 10)
             {
@@ -43,6 +31,7 @@ public class LevelController : MonoBehaviour
 
         // Süre dolduğunda yapılacak işlemler
         Debug.Log("Süre doldu! Seviyeyi tamamlayın.");
+
     }
     
 }

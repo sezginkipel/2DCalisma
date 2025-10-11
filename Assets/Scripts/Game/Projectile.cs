@@ -48,7 +48,6 @@ public class Projectile : MonoBehaviour
         }
         else if (other.CompareTag("Obstacle"))
         {
-            // Engel ile çarpışma durumunda mermiyi yok et
             Destroy(gameObject);
         }
     }
