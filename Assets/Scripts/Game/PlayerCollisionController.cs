@@ -1,27 +1,16 @@
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Handles the player's interactions with collectible items.
+/// </summary>
 public class PlayerCollisionController : MonoBehaviour
 {
-    public Health playerHealth;
-    public int playerCoin = 0;
-    public TMP_Text coinText;
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        ICollectible collectible = collision.GetComponent<ICollectible>();
+        if (collectible != null)
         {
-            playerHealth.TakeDamage(10f); 
+            collectible.Collect(gameObject); // Pass in the player GameObject as the collector
         }
-        else if (collision.CompareTag("Coin"))
-        {
-            playerCoin += 10;
-            coinText.text = "🪙" + playerCoin.ToString();
-            collision.gameObject.transform.DOMove(transform.position, 0.25f).SetEase(Ease.OutQuad);
-            Destroy(collision.gameObject, 0.25f);
-           
-
-        }
-        
     }
 }
