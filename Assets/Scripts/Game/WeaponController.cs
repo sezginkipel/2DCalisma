@@ -1,68 +1,81 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the state and firing logic for a single weapon instance.
+/// This component is controlled by a PlayerWeaponController.
+/// </summary>
 public class WeaponController : MonoBehaviour
 {
-    public AudioSource weaponAudioSource;
-    public AudioClip fireSound;
-    //public AudioClip reloadSound;
-    public GameObject projectilePrefab;
-    public Transform firePoint;
-    public float weaponRange = 100f;
-    public float fireRate = 0.5f;
+    // References
+    private WeaponData _weaponData;
+    private PlayerStats _playerStats;
+    private Transform _firePoint;
+    private AudioSource _weaponAudioSource;
+
+    // State
     private float _fireCooldown;
-    private Transform _target;
 
-
-    void Update()
+    /// <summary>
+    /// Configures the weapon with its data and necessary player references.
+    /// </summary>
+    public void Initialize(WeaponData data, PlayerStats stats, Transform firePoint, AudioSource audioSource)
     {
-        FindClosestEnemy();
+        _weaponData = data;
+        _playerStats = stats;
+        _firePoint = firePoint;
+        _weaponAudioSource = audioSource;
+        _fireCooldown = 0f; // Start ready to fire
+    }
 
-        _fireCooldown -= Time.deltaTime;
-        if (_fireCooldown <= 0f && _target != null)
+    /// <summary>
+    /// Updates the cooldown. This should be called every frame by the owner.
+    /// </summary>
+    public void UpdateCooldown()
+    {
+        if (_fireCooldown > 0)
         {
-            FireProjectile();
-            _fireCooldown = fireRate;
-            if (weaponAudioSource != null && fireSound != null)
-            {
-                weaponAudioSource.PlayOneShot(fireSound);
-            }
+            _fireCooldown -= Time.deltaTime;
         }
     }
 
-    void FindClosestEnemy()
+    /// <summary>
+    /// Attempts to fire the weapon at the given target if the cooldown is ready.
+    /// </summary>
+    public void TryFire(Transform target)
     {
-        float distanceToClosestEnemy = Mathf.Infinity;
-        Enemy closestEnemy = null;
-        Enemy[] allEnemies = FindObjectsOfType<Enemy>();
+        if (_weaponData == null) return; // Not initialized
+        if (target == null) return; // No target
+        if (_fireCooldown > 0) return; // On cooldown
 
-        foreach (Enemy currentEnemy in allEnemies)
-        {
-            float distanceToEnemy = (currentEnemy.transform.position - transform.position).sqrMagnitude;
-            if (distanceToEnemy < distanceToClosestEnemy)
-            {
-                distanceToClosestEnemy = distanceToEnemy;
-                closestEnemy = currentEnemy;
-            }
-        }
-
-        if (closestEnemy != null && distanceToClosestEnemy <= weaponRange * weaponRange)
-        {
-            _target = closestEnemy.transform;
-        }
-        else
-        {
-            _target = null;
-        }
+        Fire(target);
     }
 
-    void FireProjectile()
+    private void Fire(Transform target)
     {
-        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        Projectile projectileScript = projectile.GetComponent<Projectile>();
-        if (projectileScript != null && _target != null)
+        // Reset cooldown based on stats
+        _fireCooldown = _weaponData.attackCooldown / _playerStats.AttackSpeedMultiplier;
+
+        // Play sound
+        if (_weaponAudioSource != null && _weaponData.fireSound != null)
         {
-            Vector2 direction = (_target.position - firePoint.position).normalized;
+            _weaponAudioSource.PlayOneShot(_weaponData.fireSound);
+        }
+
+        // Create and initialize projectile
+        GameObject projectileGO = Instantiate(_weaponData.projectilePrefab, _firePoint.position, Quaternion.identity);
+        Projectile projectileScript = projectileGO.GetComponent<Projectile>();
+
+        if (projectileScript != null)
+        {
+            // Calculate final stats
+            float finalDamage = _weaponData.damage * _playerStats.DamageMultiplier;
+            float finalSpeed = _weaponData.projectileSpeed; // Can also be multiplied by a player stat if needed
+
+            // Initialize and fire projectile
+            projectileScript.Initialize(finalDamage, finalSpeed);
+            Vector2 direction = (target.position - _firePoint.position).normalized;
             projectileScript.SetDirection(direction);
         }
     }
 }
+
