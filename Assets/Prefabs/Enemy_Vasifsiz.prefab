@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4600052570688753778}
   - component: {fileID: 6838581385211619881}
   - component: {fileID: -6632425676353490277}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_Vasifsiz
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -208,5 +208,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17875946efc5ebc49b4d2ac7eb21cd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  health: 100
-  coinPrefab: {fileID: 5924253353501285815, guid: c6522ee5de08252419ca68e9e92653f1, type: 3}
+  enemyData: {fileID: 11400000, guid: 70f24d6f7fe071347a5fa35d0fc1d500, type: 2}
