@@ -3,7 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    //Game states
+    public static GameManager Instance { get; private set; }
+    public GameObject gamePausedPanel;
+
     public enum GameState
     {
         Playing,
@@ -11,39 +13,59 @@ public class GameManager : MonoBehaviour
         GameOver
     }
 
+    public GameObject deathPanel;
 
-    public GameObject gamePausedPanel;
+    public GameState CurrentState { get; private set; }
 
-
-    private GameState currentState;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
-        currentState = GameState.Playing;
+        // Ensure panels are off at the start
+        if (gamePausedPanel != null) gamePausedPanel.SetActive(false);
+        if (deathPanel != null) deathPanel.SetActive(false);
+
+        ChangeState(GameState.Playing);
     }
 
-    private void Update()
+    public void ChangeState(GameState newState)
     {
-        switch (currentState)
+        if (CurrentState == newState) return;
+
+        CurrentState = newState;
+
+        switch (CurrentState)
         {
             case GameState.Playing:
-                // Game is currently being played
+                Time.timeScale = 1f;
+                if (UIManager.Instance != null) UIManager.Instance.ShowMarketPanel(false);
                 break;
-            case GameState.Paused:
-                // Game is paused
+            case GameState.Paused: // For Market
+                Time.timeScale = 0f;
+                if (UIManager.Instance != null) UIManager.Instance.ShowMarketPanel(true);
                 break;
             case GameState.GameOver:
-                // Game is over
+                Time.timeScale = 0f;
+                // Assuming UIManager will also handle the death panel
+                // if (UIManager.Instance != null) UIManager.Instance.ShowDeathPanel(true);
+                if (deathPanel != null) deathPanel.SetActive(true); // Keeping this for now
                 break;
         }
     }
 
-
-
-
-
     public void RestartLevel()
     {
+        // Time.timeScale is set to 1 in ChangeState, but good to be sure
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
@@ -53,9 +75,4 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }
-
-
-
-
-
 }
