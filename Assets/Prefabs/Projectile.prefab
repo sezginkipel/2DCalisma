@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4150636173315222423}
   - component: {fileID: -7838051460806448877}
   - component: {fileID: 3772591773781706966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750a3042b1100fc44822a9ac6c64f707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectile
-  speed: 10
-  damage: 10
   lifetime: 5
 --- !u!50 &-7838051460806448877
 Rigidbody2D:
