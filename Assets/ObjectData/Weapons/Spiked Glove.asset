@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Spiked Glove
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 667704017422034181, guid: 51ff2cf50432e484b99cd485e24983ea, type: 3}
   weaponType: 0
   damage: 20
   attackCooldown: 0.8
@@ -24,4 +24,5 @@ MonoBehaviour:
   pierceCount: 0
   hasOnHitEffect: 1
   onHitEffectDescription: "D\xFC\u015Fman\u0131 geri iter, %10 ihtimalle kanama uygular."
-  weaponPrefab: {fileID: 0}
+  projectilePrefab: {fileID: 2549565283494068011, guid: 41004197fb4425b44a6fdab5927f041b, type: 3}
+  fireSound: {fileID: 8300000, guid: 7389af6bc3cbfae49bbf44426dd0db4a, type: 3}
