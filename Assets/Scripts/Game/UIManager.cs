@@ -2,12 +2,39 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
 
+    public GameObject marketPanel;
+    // Add other panels like deathPanel, pausePanel etc. here
 
-    public void CloseMarketPanel(GameObject marketPanel)
+    private void Awake()
     {
-        Debug.Log("Market Alanından Çıktınız!");
-        marketPanel.SetActive(false);
-        Time.timeScale = 1f; // Oyunu devam ettir
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
+    private void Start()
+    {
+        // Ensure all panels are off at the start
+        if (marketPanel != null) marketPanel.SetActive(false);
+    }
+
+    public void ShowMarketPanel(bool show)
+    {
+        if (marketPanel != null) marketPanel.SetActive(show);
+    }
+
+    public void CloseMarket()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeState(GameManager.GameState.Playing);
+        }
     }
 }
