@@ -1,45 +1,27 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimationController : MonoBehaviour
 {
-    Animator _playerAnimator;
-
-
+    private Animator _playerAnimator;
+    private PlayerMovement _playerMovement;
 
     void Start()
     {
         _playerAnimator = GetComponent<Animator>();
+        _playerMovement = GetComponent<PlayerMovement>();
+
+        if (_playerMovement == null)
+        {
+            Debug.LogError("PlayerMovement script not found on this GameObject! Animations will not work.");
+            enabled = false; // Disable this script if the movement script is missing
+        }
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.localScale = new Vector3(-0.3f, 0.3f, 1);
-        }
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.localScale = new Vector3(0.3f, 0.3f, 1);
-        }
-
-
-
-        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
-        {
-            _playerAnimator.SetBool("isWalking", true);
-        }
-        else
-        {
-            _playerAnimator.SetBool("isWalking", false);
-        }
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            _playerAnimator.SetBool("isRunning", true);
-        }
-        else
-        {
-            _playerAnimator.SetBool("isRunning", false);
-        }
+        // Read the state from PlayerMovement and update the animator
+        _playerAnimator.SetBool("isWalking", _playerMovement.IsWalking);
+        _playerAnimator.SetBool("isRunning", _playerMovement.IsRunning);
     }
 }
