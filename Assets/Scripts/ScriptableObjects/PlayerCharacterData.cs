@@ -30,7 +30,7 @@ public class PlayerCharacterData : ScriptableObject
     public bool usesOnlySpecialWeapons = false;
 
     [Header("Başlangıç Ekipmanları")]
-    public GameObject[] startingWeapons;
+    public WeaponData[] startingWeapons;
     public GameObject[] startingItems;
 
 
