@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Spikorn
   m_EditorClassIdentifier: 
   characterName: Spikorn
-  speed: 90
-  weaponSlotCount: 6
-  health: 160
+  description: 
+  characterIcon: {fileID: 0}
+  maxHealth: 100
+  moveSpeed: 1
+  attackSpeedMultiplier: 1
+  meleeDamageMultiplier: 1
+  rangedDamageMultiplier: 1
+  armor: 0
+  critChance: 0
+  hasPassiveAbility: 0
+  passiveAbilityDescription: 
+  canUseMeleeWeapons: 1
+  canUseRangedWeapons: 1
+  usesOnlySpecialWeapons: 0
+  startingWeapons:
+  - {fileID: 0}
+  startingItems: []
