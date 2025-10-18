@@ -4,7 +4,6 @@ public class Health : MonoBehaviour
 {
     public float maxHealth = 100f;
     private float _currentHealth;
-    public GameObject deathPanel; // Ölüm paneli referansı
 
     void Start()
     {
@@ -22,10 +21,12 @@ public class Health : MonoBehaviour
 
     void Die()
     {
-        if (deathPanel != null)
+        if (GameManager.Instance != null)
         {
-            deathPanel.SetActive(true); // Ölüm panelini aktif et
+            GameManager.Instance.ChangeState(GameManager.GameState.GameOver);
         }
-        Time.timeScale = 0f; // Oyunu durdur
+        // Optional: Destroy the player object or handle other death-related logic here
+        // For example, you might want to disable player controls but leave the object for an animation
+        // Destroy(gameObject);
     }
 }
