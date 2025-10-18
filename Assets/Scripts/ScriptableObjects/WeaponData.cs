@@ -48,6 +48,8 @@ public class WeaponData : ScriptableObject
 
 
 
-  public GameObject weaponPrefab;
+  [Header("Prefab ve Sesler")]
+  public GameObject projectilePrefab;
+  public AudioClip fireSound;
 
 }
